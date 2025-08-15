@@ -1,0 +1,177 @@
+@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* ── Variables ───────────────────────────────────────────── */
+:root {
+  --left-rail: 260px; /* desktop page offset ONLY */
+  --drawer-w: 260px; /* drawer width (never set to 0) */
+  --right-sidebar: 200px;
+  --gap: 2rem;
+  --page-pad: 2rem;
+  --content-max: 900px;
+}
+
+/* ── Page grid ───────────────────────────────────────────── */
+#app {
+  margin-left: var(--left-rail);
+  padding: var(--page-pad);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--right-sidebar); /* main | rightbar */
+  gap: var(--gap);
+}
+
+/* Links (keep scheme) */
+a,
+.blue {
+  text-decoration: none;
+  color: hsl(200, 100%, 70%);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+/* ── Left drawer / sidebar ───────────────────────────────── */
+.leftnav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--drawer-w); /* uses drawer width, NOT the page offset var */
+  height: 100vh;
+  background: #1e1e1e;
+  border-right: #292929 2px solid;
+  color: #fff;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: auto;
+  transition:
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+.leftnav .top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+}
+.leftnav .top p {
+  padding-left: 1.5rem;
+  color: var(--vt-c-text-dark-2);
+}
+.leftnav .top .title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.leftnav .inner {
+  padding: 1rem;
+}
+
+/* nav inside drawer */
+.leftnav nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.leftnav nav a {
+  display: block;
+  font-size: 25px;
+  color: inherit; /* white on dark bg */
+  text-decoration: none;
+  padding: 0 1rem;
+}
+.leftnav nav a:first-of-type {
+  border: 0;
+}
+.leftnav nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+.leftnav .bottom {
+  padding: 1rem;
+}
+
+.leftnav .bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+  color: var(--vt-c-text-dark-2);
+  align-items: center;
+}
+
+.leftnav .bottom-buttons a {
+  border-bottom-color: var(--vt-c-text-dark-2);
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+}
+
+/* ── Main column ─────────────────────────────────────────── */
+main {
+  max-width: var(--content-max);
+  width: 100%;
+  text-align: left;
+  position: relative;
+  z-index: 0; /* stay below drawer */
+}
+
+/* ── Right sidebar (sticky) ──────────────────────────────── */
+.rightbar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: calc(100vh - 2 * var(--page-pad));
+  overflow: auto;
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ── Mobile: collapse layout & use off-canvas drawer ─────── */
+@media (max-width: 1023.98px) {
+  /* Remove desktop page offset, but KEEP the drawer width */
+  :root {
+    --left-rail: 0px;
+  }
+  #app {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hide off-canvas by default; slide in when .open is present */
+  .leftnav {
+    transform: translateX(-100%);
+    visibility: hidden;
+  }
+  .leftnav.open {
+    transform: translateX(0) !important;
+    visibility: visible;
+  }
+
+  /* Stack rightbar */
+  .rightbar {
+    position: static;
+    height: auto;
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 1rem;
+  }
+}
+
+.hljs {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  background: #f6f8fa; /* fallback if theme not loaded */
+  overflow-x: auto;
+}
+
+/* If you also want to tweak the <code> inside */
+.hljs code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+}
