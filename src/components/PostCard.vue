@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Fa6CalendarDays, Fa6FolderOpen } from 'vue-icons-plus/fa6'
-import type { Frontmatter } from '@/types/router-meta'
+import type { Frontmatter } from '@/types/frontmatter'
 
 const { to, fm, slug } = defineProps<{
   to: string
