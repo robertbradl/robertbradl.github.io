@@ -9,7 +9,6 @@ import hljs from 'highlight.js'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/robertbradl.github.io/',
   plugins: [
     vue({ include: [/\.vue$/, /\.md$/] }),
     vueDevTools(),
