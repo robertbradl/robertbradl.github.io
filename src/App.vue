@@ -3,13 +3,12 @@ import { Fa6Github, Fa6Envelope, Fa6LinkedinIn, Fa6Terminal } from 'vue-icons-pl
 import { SiLemmy } from 'vue-icons-plus/si'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import { logModules } from '@/composables/usePosts'
+import { getTags, tagCount } from '@/composables/usePosts'
 
 const isOpen = ref(false)
 const toggleMenu = () => (isOpen.value = !isOpen.value)
 const closeMenu = () => (isOpen.value = false)
 
-logModules()
 const onKey = (e: KeyboardEvent) => {
   if (e.key === 'Escape') closeMenu()
 }
@@ -95,6 +94,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
   </main>
   <aside class="rightbar">
     <h3>tags</h3>
+    <li v-for="entry in getTags()" v-bind:key="entry">{{ entry }} - {{ tagCount(entry) }}</li>
   </aside>
 </template>
 
