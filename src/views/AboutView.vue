@@ -67,4 +67,9 @@ h1 {
   padding: 1px 5px 1px 5px;
   font-family: 'IBM Plex Mono', monospace;
 }
+@media (max-width: 1023.98px) {
+  .about {
+    padding: 0rem 1rem;
+  }
+}
 </style>

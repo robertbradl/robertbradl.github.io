@@ -35,11 +35,11 @@ function formatDate(input?: string | number | Date): string {
       </p>
       <div class="post-meta">
         <div class="meta-container">
-          <Fa6CalendarDays />
+          <Fa6CalendarDays v-if="fm.date" />
           <time v-if="fm.date">{{ formatDate(fm.date) }}</time>
         </div>
         <div class="meta-container">
-          <Fa6FolderOpen />
+          <Fa6FolderOpen v-if="fm.category" />
           <span v-if="fm.category">
             {{ Array.isArray(fm.category) ? fm.category.join(', ') : fm.category }}
           </span>
@@ -103,11 +103,5 @@ function formatDate(input?: string | number | Date): string {
 }
 .tag {
   margin-right: 0.5rem;
-}
-.read-more {
-  display: flex;
-  gap: 10px;
-  font-weight: 600;
-  margin: 0 1rem 1rem;
 }
 </style>

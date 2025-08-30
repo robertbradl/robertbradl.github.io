@@ -45,12 +45,17 @@ const props = defineProps<{ frontmatter?: Record<string, unknown> }>()
   margin-bottom: 1.25rem;
 }
 :deep(.markdown-body p) {
-  padding: 5px 0px 5px 0px;
+  padding: 5px 0px;
 }
 :deep(.markdown-body :not(pre) > code) {
   background: #262626;
   border-radius: 5px;
-  padding: 2px 5px 2px 5px;
+  padding: 2px 5px;
   font-family: 'IBM Plex Mono', monospace;
+}
+@media (max-width: 1023.98px) {
+  .post-layout {
+    padding: 0rem 1rem;
+  }
 }
 </style>
