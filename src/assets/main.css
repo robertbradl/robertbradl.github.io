@@ -64,7 +64,6 @@ main {
   overflow-x: auto;
 }
 
-/* If you also want to tweak the <code> inside */
 .hljs code {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.9rem;
