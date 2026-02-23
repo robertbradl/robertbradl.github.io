@@ -1,11 +1,25 @@
 <script setup lang="ts">
-import { getTags } from '@/composables/usePosts'
 import TagButton from '@/components/TagButton.vue'
+import { getTags } from '@/composables/usePosts'
+import { useTagFilterStore } from '@/stores/tagFilter'
+
+const tags = getTags()
+const filter = useTagFilterStore()
+
+function onSelect(tag: string) {
+  filter.toggle(tag)
+}
 </script>
 <template>
   <aside class="rightbar">
     <h3>tags</h3>
-    <TagButton v-for="entry in getTags()" v-bind:key="entry" v-bind:tag="entry" />
+    <TagButton
+      v-for="t in tags"
+      :key="t"
+      :tag="t"
+      :active="filter.isActive(t)"
+      @select="onSelect"
+    />
   </aside>
 </template>
 <style scoped>

@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import { tagCount } from '@/composables/usePosts'
-const tag = defineModel('tag', { required: true, type: String })
 
-let toggled = false
-function toggle() {
-  toggled = !toggled
-}
+const props = defineProps<{
+  tag: string
+  active?: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'select', tag: string): void
+}>()
 </script>
 
 <template>
-  <button class="tag-button" @click="toggle">{{ tag }} - {{ tagCount(tag) }}</button>
+  <button
+    type="button"
+    class="tag-button"
+    :class="{ active: props.active }"
+    @click="emit('select', props.tag)"
+  >
+    {{ props.tag }} - {{ tagCount(props.tag) }}
+  </button>
 </template>
 
 <style scoped>
@@ -31,5 +41,9 @@ function toggle() {
 .tag-button:hover {
   background-color: hsl(200, 100%, 70%, 0.3);
   color: white;
+}
+.tag-button.active {
+  color: hsl(200, 100%, 70%);
+  text-decoration: underline;
 }
 </style>
